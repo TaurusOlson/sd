@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Options
+AUTO_MAKE_DIRS=0
+
+
+make_new_dir() {
+    mkdir -p $1 && echo "Created $1." && cd $1
+}
+
+
+handle_dir() {
+    local DIR=$1
+    
+    if [ ! -d $1 ]; then
+        [ $AUTO_MAKE_DIRS = 1 ] && make_new_dir $DIR && return 0
+        echo "$1 doesn't exist."
+    else
+        cd $1
+    fi
+}
+
+
+sd() {
+    # projects/project1/src: sd doc -> cd projects/project1/doc
+    if [ $# -eq 1 ]; then
+        local NEW_DIR=$1
+        local BASENAME=$(basename  $PWD)
+        handle_dir $(echo $PWD | sed -e "s/${BASENAME}/${NEW_DIR}/g")
+
+    # projects/project1/src: sd project1 project2 -> cd projects/project2/src
+    # Or better: sd 1 2 -> cd projects/project2/src
+    elif [ $# -eq 2 ]; then
+        CUR_PATTERN=$1
+        NEW_PATTERN=$2
+        handle_dir $(echo $PWD | sed -e "s/${CUR_PATTERN}/${NEW_PATTERN}/g")
+    fi
+}
+
