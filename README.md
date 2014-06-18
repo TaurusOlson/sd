@@ -5,7 +5,7 @@
 `sd` could stand for 'swap directories' or 'sed on directories'. It's another command like `z`, `bd` and
 other commands you run in your shell to change quickly a directory.
 
-![](https://raw.github.com/TaurusOlson/sd/master/extras/sd.mov)
+![](https://raw.github.com/TaurusOlson/sd/master/img/sd.gif)
 
 
 ## Installation
@@ -41,7 +41,6 @@ Jump from `dataset1` to `dataset2`:
 Or simply:
 
     $ sd 1 2
-    $ pwd
     # you are now in path/to/A/dataset2
 
 Jump from `A` to `B`:
